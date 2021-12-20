@@ -21,7 +21,7 @@ import {
 
 export default function DashboardApp() {
   return (
-    <Page title="Dashboard | Minimal-UI">
+    <Page title="Dashboard | Zap Invoice">
       <Container maxWidth="xl">
         <Box sx={{ pb: 5 }}>
           <Typography variant="h4">Hi, Welcome back</Typography>
@@ -33,12 +33,15 @@ export default function DashboardApp() {
           <Grid item xs={12} sm={6} md={3}>
             <AppNewUsers />
           </Grid>
+
           <Grid item xs={12} sm={6} md={3}>
             <AppItemOrders />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <AppBugReports />
           </Grid>
+
+          {/*
 
           <Grid item xs={12} md={6} lg={8}>
             <AppWebsiteVisits />
@@ -71,6 +74,8 @@ export default function DashboardApp() {
           <Grid item xs={12} md={6} lg={8}>
             <AppTasks />
           </Grid>
+
+          */}
         </Grid>
       </Container>
     </Page>
