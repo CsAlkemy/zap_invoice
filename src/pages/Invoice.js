@@ -1,19 +1,7 @@
-import { Form, useFormik } from 'formik';
-import { useState } from 'react';
 // material
-import { Button, Card, Container, Grid, Stack, TextField, Typography } from '@mui/material';
+import { Button, Card, Container, Grid, TextField, Typography } from '@mui/material';
 // components
 import Page from '../components/Page';
-import {
-  ProductSort,
-  ProductList,
-  ProductCartWidget,
-  ProductFilterSidebar
-} from '../components/_dashboard/products';
-//
-import PRODUCTS from '../_mocks_/products';
-
-// ----------------------------------------------------------------------
 
 export default function EcommerceShop() {
   return (
