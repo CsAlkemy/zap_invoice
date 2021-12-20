@@ -21,7 +21,7 @@ export default function Router() {
         { element: <Navigate to="/dashboard/app" replace /> },
         { path: 'app', element: <DashboardApp /> },
         { path: 'client', element: <Client /> },
-        { path: 'invoce', element: <Invoice /> }
+        { path: 'invoice', element: <Invoice /> }
       ]
     },
     {

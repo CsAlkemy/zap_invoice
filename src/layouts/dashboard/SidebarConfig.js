@@ -20,7 +20,7 @@ const sidebarConfig = [
   },
   {
     title: 'Invoice',
-    path: '/dashboard/invoce',
+    path: '/dashboard/invoice',
     icon: getIcon(shoppingBagFill)
   }
 ];
