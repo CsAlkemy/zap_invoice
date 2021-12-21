@@ -102,10 +102,20 @@ export default function Invoice() {
                 </Grid>
                 <Grid item xs={12} md={5} xl={5}>
                   <div className="date">
-                    <strong>Date: </strong> {moment(date).format('MMMM DD, YYYY')}
+                    <strong>Date: </strong> {moment(date).format('MMMM DD, YYYY')} <br />
+                    <strong>Invoice No: </strong>{' '}
+                    {[
+                      'INV-',
+                      date.getFullYear(),
+                      date.getMonth(),
+                      date.getDate(),
+                      date.getHours(),
+                      date.getMinutes()
+                    ].join('')}
                   </div>
                 </Grid>
               </Grid>
+              <table />
             </Card>
           </Grid>
         </Grid>
