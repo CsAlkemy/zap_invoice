@@ -39,13 +39,13 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-UserListToolbar.propTypes = {
+InvoiceListToolbar.propTypes = {
   numSelected: PropTypes.number,
   filterName: PropTypes.string,
   onFilterName: PropTypes.func
 };
 
-export default function UserListToolbar({ numSelected, filterName, onFilterName }) {
+export default function InvoiceListToolbar({ numSelected, filterName, onFilterName }) {
   return (
     <RootStyle
       sx={{

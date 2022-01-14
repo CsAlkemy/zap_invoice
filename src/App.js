@@ -6,6 +6,7 @@ import GlobalStyles from './theme/globalStyles';
 // components
 import ScrollToTop from './components/ScrollToTop';
 import { BaseOptionChartStyle } from './components/charts/BaseOptionChart';
+import { UserContext } from './UserContext';
 
 // ----------------------------------------------------------------------
 
@@ -15,7 +16,9 @@ export default function App() {
       <ScrollToTop />
       <GlobalStyles />
       <BaseOptionChartStyle />
-      <Router />
+      <UserContext.Provider value="Hello">
+        <Router />
+      </UserContext.Provider>
     </ThemeConfig>
   );
 }

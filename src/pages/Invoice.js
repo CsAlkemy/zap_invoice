@@ -1,10 +1,35 @@
 // material
-import { Button, Card, Container, Grid, MenuItem, TextField, Typography } from '@mui/material';
+import {
+  Avatar,
+  Button,
+  Card,
+  Container,
+  Grid,
+  MenuItem,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableRow,
+  TextField,
+  Typography
+} from '@mui/material';
 // components
 import { useState } from 'react';
 import moment from 'moment';
 import Page from '../components/Page';
 import './Invoice.css';
+import { InvoiceListHead } from '../components/_dashboard/invoice';
+
+const TABLE_HEAD = [
+  { id: 'product', label: 'Product Name', alignRight: false },
+  { id: 'pack', label: 'Pack', alignRight: true },
+  { id: 'quantity', label: 'Quantity', alignRight: false },
+  { id: 'UnitPrice', label: 'Unit Price', alignRight: false },
+  { id: 'discount', label: 'Discount', alignRight: false },
+  { id: 'total', label: 'Total', alignRight: false }
+];
 
 export default function Invoice() {
   const [clientId, setClientId] = useState('');
@@ -12,6 +37,10 @@ export default function Invoice() {
   const [quantity, setQuantity] = useState('');
   const [unitPrice, setUnitPrice] = useState('');
   const [discount, setDiscount] = useState('');
+
+  const [page, setPage] = useState(0);
+  const [order, setOrder] = useState('asc');
+  const [orderBy, setOrderBy] = useState('name');
 
   const date = new Date();
 
@@ -54,7 +83,7 @@ export default function Invoice() {
                       sx={{ my: 1 }}
                       fullWidth
                       required
-                      type="number"
+                      type="text"
                       id="outlined-required"
                       label="Quantity"
                       onChange={(e) => setQuantity(e.target.value)}
@@ -65,7 +94,7 @@ export default function Invoice() {
                       sx={{ my: 1 }}
                       fullWidth
                       required
-                      type="number"
+                      type="text"
                       id="outlined-required"
                       label="Unit price"
                       onChange={(e) => setUnitPrice(e.target.value)}
@@ -75,8 +104,7 @@ export default function Invoice() {
                     <TextField
                       sx={{ my: 1 }}
                       fullWidth
-                      required
-                      type="number"
+                      type="text"
                       id="outlined-required"
                       label="Discount %"
                       onChange={(e) => setDiscount(e.target.value)}
@@ -115,7 +143,29 @@ export default function Invoice() {
                   </div>
                 </Grid>
               </Grid>
-              <table />
+              <Table>
+                <InvoiceListHead order={order} orderBy={orderBy} headLabel={TABLE_HEAD} />
+                <TableBody>
+                  <TableRow>
+                    <TableCell align="left">{productId || '-'}</TableCell>
+                    <TableCell align="center">100 ML</TableCell>
+                    <TableCell align="center">{quantity || '-'}</TableCell>
+                    <TableCell align="center">{unitPrice || '-'}</TableCell>
+                    <TableCell align="center">{discount ? discount.concat('%') : '-'}</TableCell>
+                    <TableCell align="right">
+                      {quantity !== '' && unitPrice !== ''
+                        ? quantity * unitPrice - quantity * unitPrice * (discount / 100)
+                        : '-'}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell rowSpan={1} />
+                    <TableCell colSpan={2} />
+                    <TableCell colSpan={2}>Subtotal</TableCell>
+                    <TableCell align="right">5000</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
             </Card>
           </Grid>
         </Grid>

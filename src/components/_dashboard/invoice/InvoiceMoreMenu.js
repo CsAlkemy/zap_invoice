@@ -9,7 +9,7 @@ import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText } from '@mui/mat
 
 // ----------------------------------------------------------------------
 
-export default function UserMoreMenu() {
+export default function InvoiceMoreMenu() {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 

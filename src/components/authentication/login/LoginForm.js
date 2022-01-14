@@ -1,21 +1,21 @@
 import * as Yup from 'yup';
 import { useState } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useFormik, Form, FormikProvider } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import { Form, FormikProvider, useFormik } from 'formik';
 import { Icon } from '@iconify/react';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 // material
 import {
-  Link,
-  Stack,
   Checkbox,
-  TextField,
+  FormControlLabel,
   IconButton,
   InputAdornment,
-  FormControlLabel
+  Stack,
+  TextField
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import axios from 'axios';
 
 // ----------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
+    email: Yup.string().required('UserID is required'),
     password: Yup.string().required('Password is required')
   });
 
@@ -32,11 +32,22 @@ export default function LoginForm() {
     initialValues: {
       email: '',
       password: '',
-      remember: true
+      isRemembered: 0
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+    onSubmit: (payload) => {
+      axios
+        .post('http://localhost:7575/dis-invoice/user/login', { ...payload })
+        .then(async (res) => {
+          if (!(res instanceof Error)) {
+            const loginResponse = res.data;
+            if (loginResponse.status === 200) {
+              navigate('/dashboard', { replace: true });
+            }
+          } else {
+            console.log('User not found!');
+          }
+        });
     }
   });
 
@@ -54,7 +65,7 @@ export default function LoginForm() {
             fullWidth
             autoComplete="username"
             type="email"
-            label="Email address"
+            label="User ID"
             {...getFieldProps('email')}
             error={Boolean(touched.email && errors.email)}
             helperText={touched.email && errors.email}
@@ -82,13 +93,9 @@ export default function LoginForm() {
 
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
           <FormControlLabel
-            control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
+            control={<Checkbox {...getFieldProps('isRemembered')} checked={values.isRemembered} />}
             label="Remember me"
           />
-
-          <Link component={RouterLink} variant="subtitle2" to="#">
-            Forgot password?
-          </Link>
         </Stack>
 
         <LoadingButton

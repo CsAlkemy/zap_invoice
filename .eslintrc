@@ -56,7 +56,7 @@
     "react/jsx-key": 1,
     "react-hooks/rules-of-hooks": 2,
     "no-unused-vars": [
-      1,
+      0,
       {
         "ignoreRestSiblings": false
       }
